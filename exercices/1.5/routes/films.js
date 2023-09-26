@@ -30,30 +30,34 @@ router.get('/', function (req, res) {
   if (req.query["minimum-duration"] === undefined) {
     return res.json(films);
   } else {
-    if (req.query["minimum-duration"] < 0){return res.status(400)}
-    return res.json(films.filter(film => film.duration >= req.query["minimum-duration"]));
-  }
+    const minimumDuration = parseInt(req.query["minimum-duration"]);
+    if (isNaN(minimumDuration) || minimumDuration <= 0){
+      return res.sendStatus(400);
+    } else {
+      return res.json(films.filter(film => film.duration >= req.query["minimum-duration"]));
+    };
+  };
 });
 
 // Read one film
 router.get('/:id', function (req, res) {
   if (req.params.id === undefined) {
-    return res.status(400);
-  }else if (req.params.id < 1 || req.params.id > films.length) {res.status(404)};
-  return res.json(films.find(film => film.id === parseInt(req.params.id)));
+    return res.sendStatus(400);
+  }else if (req.params.id < 1 || req.params.id > films.length) {res.sendStatus(404)};
+    return res.json(films.find(film => film.id === parseInt(req.params.id)));
 });
 
 // Post a new film
 router.post('/', function (req, res) {
   const title = req?.body?.title?.length !== 0 ? req.body.title : undefined;
-  const duration = req?.body?.duration?.length!== 0 ? req.body.duration : undefined;
-  const budget = req?.body?.budget?.length!== 0? req.body.budget : undefined;
-  const link = req?.body?.link?.length!== 0? req.body.link : undefined;
+  const duration = req?.body?.duration?.length !== 0 ? req.body.duration : undefined;
+  const budget = req?.body?.budget?.length !== 0 ? req.body.budget : undefined;
+  const link = req?.body?.link?.length !== 0 ? req.body.link : undefined;
 
-  if (!title || !duration || !budget || !link) { return res.status(400)};
-  
+  if (!title || !duration || !budget || !link) { return res.sendStatus(400)};
+
   const filmExisting = films.find(film => film.title === title)
-  if ( filmExisting ) { return res.status(409)};
+  if ( filmExisting ) { return res.sendStatus(409)};
 
   const lastItemIndex = films?.length !== 0 ? films.length - 1 : undefined;
   const lastId = lastItemIndex !== undefined ? films[lastItemIndex]?.id : 0;

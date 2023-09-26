@@ -3,7 +3,7 @@ POST http://localhost:3000/films
 Content-Type: application/json
 
 {
-    "title": "Seigneur des annaux",
+    "title": "Star Wars: The Phantom Menace (Episode I)",
     "duration": 300,
     "budget": 2000,
     "link": "lotr.com"
