@@ -1,0 +1,10 @@
+### Post a new film
+POST http://localhost:3000/films
+Content-Type: application/json
+
+{
+    "title": "Seigneur des annaux",
+    "duration": 300,
+    "budget": 2000,
+    "link": "lotr.com"
+}
