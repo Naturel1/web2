@@ -1,0 +1,40 @@
+### Post a new film
+POST http://localhost:3000/films
+Content-Type: application/json
+
+{
+    "title": "seigneur des annaux",
+    "duration": 300,
+    "budget": 2000,
+    "link": "lotr.com"
+}
+
+### Delete pizza identified by 2
+DELETE http://localhost:3000/films/4
+
+### Modifie a film
+PATCH http://localhost:3000/films/4
+Content-Type: application/json
+
+{
+    "title":"Magic Green 2"
+}
+
+### modifie a  film
+PUT http://localhost:3000/films/4
+Content-Type: application/json
+
+{
+    "title":"Magic Green 1"
+}
+
+### create a film at index 3
+PUT http://localhost:3000/films/4
+Content-Type: application/json
+
+{
+    "title": "seigneur des annaux",
+    "duration": 300,
+    "budget": 2000,
+    "link": "lotr.com"
+}
